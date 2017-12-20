@@ -1,12 +1,12 @@
-var counter=0;
 
-function like(counter){
- $('#counter').text(counter);
-};
 
 $(document).ready(function() {
-	$('#update').click(function() {
-		counter+=1;
-		like(counter);
+	$('.update').click(function() {
+		 var counterEl = $(this).next('.counter'),
+		 counter = 0;
+		 if(counterEl.text() != "_ _ _ _") {
+		 	counter = parseInt(counterEl.text());
+		 }
+		 counterEl.text(counter+1);
 	});
 });

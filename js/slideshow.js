@@ -1,5 +1,5 @@
 function cycleItems(currentIndex) {
-  var item = $('.container div img').eq(currentIndex);
+  var item = $('.demo div img').eq(currentIndex);
   items.hide();
   item.css('display','inline-block');
   };
@@ -7,7 +7,7 @@ function cycleItems(currentIndex) {
 
 $(document).ready(function() {
   var currentIndex = 0;
-  items = $('.container div img');
+  items = $('.demo div img');
   itemAmt = items.length;
 
   var autoSlide = function() {
@@ -22,6 +22,8 @@ $(document).ready(function() {
 
   $('.next').click(function() {
   clearInterval(autoSlideStart);
+  $('.play').removeClass("fa-pause");
+  $('.play').addClass("fa-play");
   currentIndex += 1;
   if (currentIndex > itemAmt - 1) {
     currentIndex = 0;
@@ -31,6 +33,8 @@ $(document).ready(function() {
 
 $('.prev').click(function() {
   clearInterval(autoSlideStart);
+  $('.play').removeClass("fa-pause");
+  $('.play').addClass("fa-play");
   currentIndex -= 1;
   if (currentIndex < 0) {
     currentIndex = itemAmt - 1;
@@ -40,8 +44,20 @@ $('.prev').click(function() {
 
 $('.play').click(function(){
   $('.dot').removeClass('active');
-  clearInterval(autoSlideStart);
-  autoSlideStart = setInterval(autoSlide, 1200);
+  if($(this).hasClass("fa-play")) {
+    $(this).removeClass("fa-play");
+    $(this).addClass("fa-pause");
+    clearInterval(autoSlideStart);
+    autoSlideStart = setInterval(autoSlide, 1200);
+  } else {
+    $(this).removeClass("fa-pause");
+    $(this).addClass("fa-play");
+    clearInterval(autoSlideStart);
+  }
+  // $(this).toggleClass("fa-play");
+  // $(this).toggleClass("fa-pause");
+  // clearInterval(autoSlideStart);
+  // autoSlideStart = setInterval(autoSlide, 1200);
   });
 
 $('.dot').click(function(){
