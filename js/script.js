@@ -26,13 +26,31 @@ $(".fixedmenu li a").click(function(){
 
 var nav = $('.fixedmenu');
 
+var onScroll = function(event){
+    var scrollPos = $(document).scrollTop();
+    $('#menu a').each(function () {
+        var currLink = $(this);
+        var refElement = $(currLink.attr("href"));
+        if (refElement.position().top <= scrollPos && refElement.position().top + refElement.height() > scrollPos) {
+            $('#menu ul li a').removeClass("active");
+            currLink.addClass("active");
+        }
+        else{
+            currLink.removeClass("active");
+        }
+    });
+}
+
 $(window).scroll(function () {
   if ($(this).scrollTop() > 0) {
     nav.addClass("f-nav");
   } else {
     nav.removeClass("f-nav");
   }
+  $(document).on("scroll", onScroll);
 });
+
+
 
 });
 
